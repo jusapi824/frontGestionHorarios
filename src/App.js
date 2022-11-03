@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 
 export default function App() {
   const [instructores, setInstructores] = useState([]);
+  const [cargar, setCargar] = useState(false);
+
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
@@ -11,28 +14,32 @@ export default function App() {
   const [rol, setRol] = useState("");
   const baseUrl = "https://jsonplaceholder.typicode.com";
 
+  const optionsSelect = [
+      {value: 0, label: "Seleccionar Rol"},
+      {value: 1, label: 'Coordinator'},
+      {value: 2, label: 'Instructor'}
+  ];
+
   // Obtener datos con fetch API
-  /*useEffect(() => {
-    const cargarPost = async () => {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/instructores?_limit=5"
-      );
+  useEffect(() => {
+    const cargarInstructor = async () => {
+      const response = await fetch(`${baseUrl}/instructores`);
       const data = await response.json();
       console.log(data);
       //setInstructores(data);
     };
     if (cargar) {
-      //cargarPost();
-      //setCargar(false);
+      cargarInstructor();
+      setCargar(false);
     }
 
   }, [cargar]);
-  */
+  
 
   // Borrar datos con fetch API
   const borrarInstructor = async (id) => {
     let response = await fetch(
-      `https://jsonplaceholder.typicode.com/instructores/${id}`,
+      `${baseUrl}/instructores/${id}`,
       {
         method: "DELETE"
       }
@@ -49,8 +56,9 @@ export default function App() {
   };
 
   // Publicar datos con fetch API
-  const agregarInstructor = async (nombre, email) => {
-    let response = await fetch("https://jsonplaceholder.typicode.com/instructores", {
+  const agregarInstructor = async (_nombre, _email, _telefono, _profesion, _genero, _areaOrientar, _rol) => {
+    console.log(rol);
+    let response = await fetch(`${baseUrl}/instructores`, {
       method: "POST",
       body: JSON.stringify({
         nombre: nombre,
@@ -59,7 +67,7 @@ export default function App() {
         profesion: profesion,
         genero: genero,
         areaOrientar: areaOrientar,
-        rol:2,
+        rol:_rol,
         //userId: Math.random().toString(36).slice(2)
       }),
       headers: {
@@ -67,15 +75,19 @@ export default function App() {
       }
     });
     let data = await response.json();
-    /*setInstructores((instructores) => [data, ...instructores]);
-    setTitulo("");
-    setCuerpoMsj("");*/
+    setInstructores((instructores) => [data, ...instructores]);
+    setNombre("");
+    setEmail("");
+    setTelefono("");
+    setProfesion("");
+    setGenero("");
+    setAreaOrientar("");
   };
 
   // Controlador que maneja el envio del formulario
   const controladorDelEnvio = (e) => {
     e.preventDefault();
-    agregarInstructor(nombre, email);
+    agregarInstructor(nombre, email, telefono, profesion, genero, areaOrientar, rol);
   };
 
   return (
@@ -107,7 +119,7 @@ export default function App() {
                       <a className="nav-link" href="#">Ambientes</a>
                     </li>
                   </ul>
-                  <div class="d-flex">
+                  <div className="d-flex">
                     <img src="./img/Logo-de-SENA-png-verde-300x300.png"
                     alt="SENA" height="50"></img>
                   </div>
@@ -169,11 +181,16 @@ export default function App() {
                   onChange={(e) => setAreaOrientar(e.target.value)}
                 />
 
-                <select className="form-control mt-3">
-                  <option value="" selected>Seleccione un rol</option>
-                  <option value="Coordinador">Coordinador</option>
-                  <option value="Instructor">Instructor</option>
-                </select>
+                <Select
+                  className="form-control mt-3"
+                  value={optionsSelect.value}
+                  options={optionsSelect}
+                  defaultValue={optionsSelect[0]}
+                  onChange={(e) => setRol(e.value)}
+                  //options= {{value: 1, label: 'Coordinator'}}//, value: 2, label: 'Instructor'}}
+                  //defaultValue={{ label: "Seleccionar Rol", value: 0 }}
+                />
+
                 <button className="btn btn-success mt-3" type="submit">
                   Agregar Instructor
                 </button>
@@ -181,18 +198,32 @@ export default function App() {
             </div>
           </div>
           <div className="mt-5 mb-5">
-            {instructores.map((post) => {
+
+          <div className="card mt-3 p-3">
+                  <h2 className="card-title">Julian Salazar</h2>
+                  <p className="card-text">julian@gmail.com</p>
+                  <div className="d-grid d-sm-flex justify-content-sm-end">
+                    <button
+                      type="button"
+                      className="btn btn-outline-danger" >
+                      Borrar Instructor
+                    </button>
+                  </div>
+                </div>
+
+
+            {instructores.map((instructor) => {
               return (
-                <div className="card mt-3 p-3" key={post.id}>
-                  <h2 className="card-title">{post.title}</h2>
-                  <p className="card-text">{post.body}</p>
+                <div className="card mt-3 p-3" key={instructor.id}>
+                  <h2 className="card-title">{instructor.nombre}</h2>
+                  <p className="card-text">{instructor.email}</p>
                   <div className="d-grid d-sm-flex justify-content-sm-end">
                     <button
                       type="button"
                       className="btn btn-outline-danger"
-                      onClick={() => borrarInstructor(post.id)}
+                      onClick={() => borrarInstructor(instructor.id)}
                     >
-                      Borrar Post
+                      Borrar Instructor
                     </button>
                   </div>
                 </div>
