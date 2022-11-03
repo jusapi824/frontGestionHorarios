@@ -94,29 +94,29 @@ export default function App() {
     <div>
         <nav className="navbar navbar-expand-sm menu-bar shadow">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="https://google.com">
                     <img src="./img/calendar.png"
                         alt="Software Gestión Horarios" height="50"/>
                 </a>
                 <div className="navbar-collapse collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Inicio</a>
+                      <a className="nav-link" href="https://google.com">Inicio</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link active" aria-current="page" href="#">Horarios</a>
+                      <a className="nav-link active" aria-current="page" href="https://google.com">Horarios</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Usuarios</a>
+                      <a className="nav-link" href="https://google.com">Usuarios</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Fichas</a>
+                      <a className="nav-link" href="https://google.com">Fichas</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Programas de Formación</a>
+                      <a className="nav-link" href="https://google.com">Programas de Formación</a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link" href="#">Ambientes</a>
+                      <a className="nav-link" href="https://google.com">Ambientes</a>
                     </li>
                   </ul>
                   <div className="d-flex">
