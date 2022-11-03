@@ -128,53 +128,53 @@ export default function App() {
             </div>
         </nav>
       <div className="container">
-          <div className="row mt-4 text-center">
-            <h1>Software de Gestión de Horarios SENA</h1>
+          <div className="row mt-3 text-center">
+            <h3>Software de Gestión de Horarios SENA</h3>
           </div>
-          <div className="row p-2 mt-3">
+          <div className="row p-2">
             <hr></hr>
           </div>
           <div className="row justify-content-center">
-            <div className="card mt-3 p-3 w-50  ">
-              <h2>Ingreso de Instructores</h2>
+            <div className="card p-3 w-50  ">
+              <h4>Ingreso de Instructores</h4>
               <form onSubmit={controladorDelEnvio}>
                 <input
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   placeholder="Nombre Instructor"
                   type="text"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
                 />
                 <input
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   placeholder="Email"
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   placeholder="Teléfono"
                   type="text"
                   value={telefono}
                   onChange={(e) => setTelefono(e.target.value)}
                 />
                 <input
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   placeholder="Profesión"
                   type="text"
                   value={profesion}
                   onChange={(e) => setProfesion(e.target.value)}
                 />
                 <input
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   placeholder="Género"
                   type="text"
                   value={genero}
                   onChange={(e) => setGenero(e.target.value)}
                 />
                 <input
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   placeholder="Area a Orientar"
                   type="text"
                   value={areaOrientar}
@@ -182,7 +182,7 @@ export default function App() {
                 />
 
                 <Select
-                  className="form-control mt-3"
+                  className="form-control mt-2"
                   value={optionsSelect.value}
                   options={optionsSelect}
                   defaultValue={optionsSelect[0]}
